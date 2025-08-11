@@ -1,12 +1,51 @@
-# React + Vite
+❖ Project Overview
+A simple Todo application demonstrating Create, Read, Update, Delete (CRUD) operations using React and Redux (Redux Toolkit recommended). Includes local persistence (localStorage), basic validation, and a small, easy-to-extend codebase — great for learning or bootstrapping a larger app.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🔥 Features
+Add new todos
 
-Currently, two official plugins are available:
+Edit existing todos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Toggle complete / incomplete
 
-## Expanding the ESLint configuration
+Delete single todo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Filter by All / Active / Completed
+
+Persist todos to localStorage
+
+Clean Redux architecture (slices / actions / selectors)
+
+Ready for unit tests and feature expansion
+
+🧰 Tech stack
+React (v18+)
+
+Redux (reduxjs/toolkit recommended)
+
+react-redux
+
+JavaScript (ES6+)
+
+Optional: TypeScript, react-router, CSS framework (Tailwind / Bootstrap)
+
+🚀 Quick Start
+Prerequisites
+Node.js v16+ and npm or yarn
+✍️ Contribution
+Contributions welcome!
+
+Fork the repo
+
+Create a feature branch feature/name
+
+Commit & PR with description and screenshots
+
+📜 License
+MIT — feel free to reuse, modify, and learn.
+
+📬 Contact
+If you want a version with TypeScript, routing, tests, or Tailwind CSS — tell me which and I’ll add the full code examples and components.
+
+Output:
+https://drive.google.com/file/d/1eLk0azPBnaS6Qf2d2qIfUtkDNYDfX0S9/view?usp=sharing
