@@ -31,5 +31,9 @@ This project demonstrates how to manage **students, courses, and teachers** with
 
 ---
 
-## 📂 Project Structure
+
+
+
+## 📸 Preview
+<video src="https://github.com/user-attachments/assets/258d15e1-6697-463b-8a13-c91c28505666"></video>
 
