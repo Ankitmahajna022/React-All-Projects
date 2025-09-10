@@ -46,7 +46,6 @@ function ChatView() {
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(store, "chats", id));
-      alert("Message deleted!");
     } catch (err) {
       alert("Error deleting: " + err.message);
     }
@@ -106,7 +105,7 @@ function ChatView() {
                   alert("You can't delete other's message!!");
                 }
               }}
-              className={`msg-box ${msg.sender === "user-2" ? "left" : "right"}`}
+              className={`msg-box ${msg.sender === "user-2" ? "right" : "left"}`}
             >
               <span>{msg.msg}</span>
             </div>
