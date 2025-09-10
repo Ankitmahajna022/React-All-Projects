@@ -1,12 +1,13 @@
 .chat-box {
   height: 100vh;
-  width: 40%;
+  width: 30%;
   background-color: #f0f0f0;
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
+  margin-right: 10px;
 }
 
 .chat {
@@ -28,14 +29,28 @@
   display: flex;
   width: 100%;
 }
+.right {
+  justify-content: end;
+}
+
+.left {
+  justify-content: start;
+}
+
+.right span {
+  background-color: rgb(29, 127, 203);
+}
+
+.left span {
+  background-color: rgb(110, 152, 184);
+}
 
 .msg-box span {
-  display: inline-block;
+
   max-width: 70%;
   padding: 10px 15px;
   word-wrap: break-word;
   font-size: 15px;
-background-color: rgb(29, 127, 203);
   color: white;
   border-radius: 10px 10px 0 10px;
 }
