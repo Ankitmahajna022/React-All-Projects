@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./Chat.css";
 import { store } from '../../fireebase';
-import { collection, addDoc, getDocs, Timestamp,doc,deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, Timestamp, doc, deleteDoc } from 'firebase/firestore';
 
 function ChatView() {
   const msgRef1 = useRef("");
@@ -22,7 +22,7 @@ function ChatView() {
         })
         .catch((err) => alert("Can't send message: " + err.message));
     }
-    msgRef1.current.value=""
+    msgRef1.current.value = ""
   };
 
   const handleMessage2 = () => {
@@ -39,7 +39,7 @@ function ChatView() {
         })
         .catch((err) => alert("Can't send message: " + err.message));
     }
-    msgRef2.current.value=""
+    msgRef2.current.value = ""
   };
 
   const handleGetMessage = async () => {
@@ -47,10 +47,10 @@ function ChatView() {
     let msgList = querySnapshot.docs.map((doc) => {
       let data = doc.data();
 
-      data={...data,docId:doc.id}
+      data = { ...data, docId: doc.id }
       console.log(data)
       return data
-    
+
     });
 
     msgList.sort((a, b) => a.time.seconds - b.time.seconds);
@@ -58,8 +58,8 @@ function ChatView() {
     setMessage(msgList);
   };
 
-  const handleDelete = (id)=>{
-    deleteDoc(doc(store,"chats",id)).then(()=>{
+  const handleDelete = (id) => {
+    deleteDoc(doc(store, "chats", id)).then(() => {
       handleGetMessage();
       alert("message is delete....!")
     })
@@ -74,19 +74,17 @@ function ChatView() {
       <div className="chat-box">
         <div className="chat">
           {message.map((msg, index) => (
-            <div key={index} onDoubleClick={()=>{
-              if(msg.sender==="uesr-1")
-              {
+            <div key={index} onDoubleClick={() => {
+              if (msg.sender === "uesr-1") {
                 handleDelete(msg.docId)
                 console(msg.docId)
               }
-              else
-              {
+              else {
                 alert("you cant delete other's message !!")
               }
-             
+
             }} className={`msg-box
-            ${msg.sender==="user-1"?"right":"left "}`}>
+            ${msg.sender === "user-1" ? "right" : "left "}`}>
               <span>{msg.msg}</span>
             </div>
           ))}
@@ -100,8 +98,17 @@ function ChatView() {
       <div className="chat-box">
         <div className="chat">
           {message.map((msg, index) => (
-            <div key={index} className={`msg-box
-            ${msg.sender==="user-2"?"left":"right "}`}>
+            <div key={index} onDoubleClick={() => {
+              if (msg.sender === "uesr-2") {
+                handleDelete(msg.docId)
+                console(msg.docId)
+              }
+              else {
+                alert("you cant delete other's message !!")
+              }
+
+            }} className={`msg-box
+            ${msg.sender === "user-2" ? "left" : "right "}`}>
               <span>{msg.msg}</span>
             </div>
           ))}
@@ -118,3 +125,4 @@ function ChatView() {
 }
 
 export default ChatView;
+ 
