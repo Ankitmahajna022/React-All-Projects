@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import "./Chat.css";
-import { store } from '../../fireebase';
+import { store } from '../../firebase/firebase';
 import { collection, addDoc, Timestamp, doc, deleteDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
 
 function ChatView() {
