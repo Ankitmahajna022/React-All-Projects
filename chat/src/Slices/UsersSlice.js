@@ -1,8 +1,31 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { collection, getDocs, addDoc } from "firebase/firestore"
+import { collection, getDocs, addDoc, deleteDoc, doc, } from "firebase/firestore"
 import { store } from "../firebase/firebase"
+import { createUserWithEmailAndPassword, } from "firebase/auth"
+import { auth } from "../firebase/firebase"
+
+
+//signUpUser
+
+const signUpUser = async (email, password ) => {
+    const userCreate = await createUserWithEmailAndPassword(auth, email, password)
+    return userCreate.user
+}
+
+//signInUser
+const signInUser=createAsyncThunk("signInUser",async({email,password})=>{
+     userCredential=await signInWithEmailAndPassword(auth,email,password);
+
+     const user={
+        email:userCredential.user.email,
+        displayName:userCredential.user.displayName,
+        image:userCredential.user.photoURL,
+     }
+     
+    })
 
 const initialState = {
+    currentUser: {},
     usres: [],
     isLoading: true,
     error: null,
@@ -17,14 +40,30 @@ const fetchUser = createAsyncThunk("Usre-fetch", async () => {
 })
 
 // add user
-const addUser = createAsyncThunk("User-add", async (email, password, name) => {
-    const docRef = await addDoc(collection(store, "users"), {
+const addUser = createAsyncThunk("User-add", async ({email, password, name}) => {
+    const user=signUpUser(email,password);
+
+    if(user)
+    {
+         const docRef = await addDoc(collection(store, "users"), {
         email: email,
         password: password,
         name: name,
     })
-    return docRef
+    return docRef;
+    }
+   return null;
+});
+
+//updata user
+const updataUser = () => { }
+
+//delete user
+const deleteUser = createAsyncThunk("User-delete", async (id) => {
+    deleteDoc(doc(store, "users", id))
+    return id
 })
+
 
 const userSlice = createSlice({
     name: "users",
@@ -32,25 +71,57 @@ const userSlice = createSlice({
     reducers: {},
     extraReducers: (buildr) => {
         buildr.addCase(fetchUser.pending, (state) => {
-            state.isLoading = true
-        }).addCase(fetchUser.fulfilled, (state, action) => {
-            state.usres = action.payload,
-                state.isLoading = false
-        }).addCase(fetchUser.rejected, (state) => {
-            state.error = "Cant fetch users !!";
-            state.isLoading=false;
-        }).addCase(addUser.pending,(state)=>{
-            state.isLoading=true
-        }).addCase(addUser.fulfilled,(state,action)=>{
-            const id=action.payload.id
-            const user=action.payload.data();
-
-            state.usres.push({"user-id":id,...user})
-            state.isLoading=false
-        }).addCase(addUser.rejected,(state,action)=>{
-            state.error="geting error while add user !"
-            state.isLoading=false
+            state.isLoading = true;
         })
+        .addCase(fetchUser.fulfilled, (state, action) => {
+            state.usres = action.payload;
+            state.isLoading = false;
+        })
+        .addCase(fetchUser.rejected, (state) => {
+            state.error = "Cant fetch users !!";
+            state.isLoading = false;
+        })
+        .addCase(addUser.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(addUser.fulfilled, (state, action) => {
+            const id = action.payload.id;
+            const user = action.payload.data();
+            state.currentUser = { "user-id": id, ...user };
+            state.usres.push({ "user-id": id, ...user });
+            state.isLoading = false;
+        })
+        .addCase(addUser.rejected, (state) => {
+            state.error = "geting error while add user !";
+            state.isLoading = false;
+        })
+        .addCase(deleteUser.pending, (state) => {
+            state.isLoading = true;
+        })
+        .addCase(deleteUser.fulfilled, (state, action) => {
+            const id = action.payload;
+            state.usres.filter((user) => user.id != id);
+            state.isLoading = false;
+        })
+            .addCase(deleteUser.pending, (state) => {
+            state.error = "geting error white deleting user...";
+            state.isLoading = false;
+        })
+        .addCase(signInUser.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(signInUser.fulfilled,(state,action)=>{
+            const user=action.payload;
+            state.currentUser==state.usres.find(
+                (value)=>value.email==user.email
+            );
+            state.isLoading=false;
+            
+        })
+        .addCase(signInUser.rejected,(state)=>{
+            state.isLoading=false;
+            state.error="User not Find...!"
+        });
     }
 })
 
