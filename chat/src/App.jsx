@@ -1,15 +1,21 @@
+import SignIn from '../page/Auth/SignIn/SignIn'
+import SignUp from '../page/Auth/SignUp/SignUp'
+import Home from '../page/Home/Home'
 import './App.css'
-import ChatView from './components/Chat/Chat'
 import {Route, Routes} from 'react-router-dom'
-import SiginIn from './components/Auht/SiginIn'
-import User from './components/User/User'
+
 
 function App() {
  
 
   return (
     <>
-      
+      <Routes>
+        <Route path='/' element={<SignIn/>} />
+        <Route path='/signUp' element={<SignUp/>} />
+        <Route path='/Home' element={<Home/>} />
+        
+      </Routes>
     </>
   )
 }

@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { collection, getDocs, addDoc, deleteDoc, doc, } from "firebase/firestore"
-import { store } from "../firebase/firebase"
+import { store,auth } from "../firebase/firebase"
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "../firebase/firebase"
+
 
 
 //signUpUser
