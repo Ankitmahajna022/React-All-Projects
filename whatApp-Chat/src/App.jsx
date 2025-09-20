@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import SignIn from './page/auth/SignIn'; // Corrected path
-import SignUp from './page/auth/SignUp'; // Corrected path
+import SignIn from './page/auth/signIn/SignIn'; // Corrected path
+import SignUp from './page/auth/signUp/SignUp'; // Corrected path
 import Home from './page/Home/Home';
 
 function App() {
