@@ -13,7 +13,7 @@ const signUpUser = async (email, password ) => {
 }
 
 //signInUser
-const signInUser=createAsyncThunk("signInUser",async({email,password})=>{
+ export const signInUser=createAsyncThunk("signInUser",async({email,password})=>{
      const userCredential=await signInWithEmailAndPassword(auth,email,password);
 
      const user={
@@ -26,7 +26,7 @@ const signInUser=createAsyncThunk("signInUser",async({email,password})=>{
 
 const initialState = {
     currentUser: {},
-    usres: [],
+    users: [],
     isLoading: true,
     error: null,
 }
@@ -74,7 +74,7 @@ const userSlice = createSlice({
             state.isLoading = true;
         })
         .addCase(fetchUser.fulfilled, (state, action) => {
-            state.usres = action.payload;
+            state.users = action.payload;
             state.isLoading = false;
         })
         .addCase(fetchUser.rejected, (state) => {
@@ -100,7 +100,7 @@ const userSlice = createSlice({
         })
         .addCase(deleteUser.fulfilled, (state, action) => {
             const id = action.payload;
-            state.usres = state.usres.filter((user) => user.id != id);
+            state.users = state.users.filter((user) => user.id != id);
             state.isLoading = false;
         })
             .addCase(deleteUser.rejected, (state) => {
@@ -112,7 +112,7 @@ const userSlice = createSlice({
         })
         .addCase(signInUser.fulfilled,(state,action)=>{
             const user=action.payload;
-            state.currentUser=state.usres.find(
+            state.currentUser=state.users.find(
                 (value)=>value.email==user.email
             );
             state.isLoading=false;
