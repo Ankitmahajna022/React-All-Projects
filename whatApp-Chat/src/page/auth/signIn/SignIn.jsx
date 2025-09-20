@@ -1,22 +1,24 @@
 import React,{ useRef } from 'react'
-import {useDispatch,useSelector} from "react-redux"
+import {useDispatch} from "react-redux"
 import {signInUser} from "../../../Slices/userSlice"
 
 function SignIn() {
 
  const dispatch= useDispatch();
 
- const {users,isLoding,error} = useSelector((state)=>state.users)
+// const {users,isLoding,error} = useSelector((state)=>state.users)
+const emailRef=useRef("");
+  const passwrordRef=useRef("")
 
  const handleSignIn=()=>{
   const email=emailRef.current.value
   const password=passwrordRef.current.value
+  console.log("chek-1")
 
-  dispatch(signInUser(email,password))
+  dispatch(signInUser({email,password}))
  }
 
-  const emailRef=useRef("");
-  const passwrordRef=useRef("")
+  
   return (
 
     <div>
