@@ -14,6 +14,8 @@ const signUpUser = async (email, password ) => {
 
 //signInUser
  export const signInUser=createAsyncThunk("signInUser",async({email,password})=>{
+
+    console.log("chek-2")
      const userCredential=await signInWithEmailAndPassword(auth,email,password);
 
      const user={
@@ -21,6 +23,7 @@ const signUpUser = async (email, password ) => {
         displayName:userCredential.user.displayName,
         image:userCredential.user.photoURL,
      }
+
      return user;
     })
 
@@ -112,10 +115,12 @@ const userSlice = createSlice({
         })
         .addCase(signInUser.fulfilled,(state,action)=>{
             const user=action.payload;
+            console.log("chek-3")
             state.currentUser=state.users.find(
                 (value)=>value.email==user.email
             );
             state.isLoading=false;
+            
             
         })
         .addCase(signInUser.rejected,(state)=>{
