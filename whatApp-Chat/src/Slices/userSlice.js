@@ -120,7 +120,7 @@ const userSlice = createSlice({
                 (value)=>value.email==user.email
             );
             state.isLoading=false;
-            
+
             
         })
         .addCase(signInUser.rejected,(state)=>{
