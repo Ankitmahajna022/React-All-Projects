@@ -5,11 +5,12 @@ import { Provider } from 'react-redux'
 import { store } from '../src/store/store.js'
 import { BrowserRouter } from 'react-router-dom'
 
+
 createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <App />
-    </Provider>
-    
-  </BrowserRouter>,
+ <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+  </Provider>
+  
 )

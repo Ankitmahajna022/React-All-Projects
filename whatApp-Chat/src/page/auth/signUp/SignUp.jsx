@@ -6,6 +6,7 @@ function SignUp() {
         <h1>Sign Up</h1>
         <input type="email" />
         <input type="password" />
+        <button></button>
     </div>
   )
 }

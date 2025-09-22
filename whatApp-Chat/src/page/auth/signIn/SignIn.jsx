@@ -1,10 +1,13 @@
 import React,{ useRef } from 'react'
 import {useDispatch} from "react-redux"
 import {signInUser} from "../../../Slices/userSlice"
+import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
 
  const dispatch= useDispatch();
+
+ const navigate =useNavigate()
 
 // const {users,isLoding,error} = useSelector((state)=>state.users)
 const emailRef=useRef("");
@@ -16,6 +19,9 @@ const emailRef=useRef("");
   console.log("chek-1")
 
   dispatch(signInUser({email,password}))
+
+  navigate ("/Home")
+
  }
 
   
