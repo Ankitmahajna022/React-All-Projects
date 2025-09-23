@@ -7,9 +7,6 @@ function SignUp() {
  const emailRef=useRef()
  const passwordRef=useRef()
 
-//const currentUser = useSelector((state) => state.users.currentUser);
-
-
  const dispatch=useDispatch()
 
  const handlaSignUp=()=>{
