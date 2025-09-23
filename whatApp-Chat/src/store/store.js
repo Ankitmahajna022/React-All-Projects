@@ -3,6 +3,6 @@ import userReducer from "../Slices/userSlice";
 
 export const store=configureStore({
     reducer:{
-        usre:userReducer
+        usres:userReducer
     }
 })
