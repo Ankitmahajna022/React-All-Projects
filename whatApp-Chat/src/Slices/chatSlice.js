@@ -12,8 +12,6 @@ import {setDoc,doc} from "firebase/firestore"
         sender:"admin1@gamil.com"
     })
  })
- 
-
 // chat edit
 // chat delete
 
