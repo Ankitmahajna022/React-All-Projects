@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import {useDispatch} from "react-redux"
 import {addUser} from "../../../Slices/userSlice"
+import {createChat} from "../../../Slices/chatSlice"
 
 function SignUp() {
  const nameRef=useRef()
@@ -10,6 +11,7 @@ function SignUp() {
  const dispatch=useDispatch()
 
  const handlaSignUp=()=>{
+
     const name=nameRef.current.value
     const email=emailRef.current.value
     const password=passwordRef.current.value
@@ -21,7 +23,9 @@ function SignUp() {
   return (
     <div>
         <h1>Sign Up</h1>
-        
+        <button onClick={()=>{
+          dispatch(createChat())
+        }}></button>
         <input type="name" placeholder='name' ref={nameRef}/>
         <input type="email" placeholder='email'ref={emailRef}/>
         <input type="password" placeholder='password'ref={passwordRef}/>
