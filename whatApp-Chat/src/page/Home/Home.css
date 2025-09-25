@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #574cd6, #7d6eff);
+}
+
+.user {
+    flex: 4;
+    max-width: 550px;
+    background: #574cd6;
+    color: white;
+    padding: 15px;
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    overflow-y: auto;
+}
+
+.chatBox {
+    width: 60%;
+    background: #fff;
+    border-radius: 15px 0 0 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
