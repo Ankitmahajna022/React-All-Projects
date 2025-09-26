@@ -29,17 +29,6 @@ const navigate=useNavigate()
     <div className="signup-container">
       <div className="signup-box">
         <h1>Sign Up</h1>
-
-        {/* Small createChat button (optional) */}
-        <button
-          className="small-btn"
-          onClick={() => {
-            dispatch(createChat())
-          }}
-        >
-          Create Chat
-        </button>
-
         <input type="text" placeholder="Name" ref={nameRef} />
         <input type="email" placeholder="Email" ref={emailRef} />
         <input type="password" placeholder="Password" ref={passwordRef} />

@@ -5,8 +5,6 @@
   background: linear-gradient(135deg, #574cd6, #7d6eff);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* Sidebar */
 .user {
   flex: 6;
   max-width: 500px;
@@ -19,8 +17,6 @@
   flex-direction: column;
   gap: 12px;
 }
-
-/* Chat area */
 .chatBox {
   flex: 5;
   background: #fff;
@@ -29,7 +25,5 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-
-  /* 👇 important fix */
   height: 100%;    
 }

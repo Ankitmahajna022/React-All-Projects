@@ -1,6 +1,13 @@
 /* SignIn.css */
 
-
+.signin-wrapper {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #574cd6, #7d6eff);
+}
 
 .signin-container {
   background: #fff;
