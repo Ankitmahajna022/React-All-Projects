@@ -1,6 +1,6 @@
 import {createSlice,createAsyncThunk} from "@reduxjs/toolkit"
 import { store } from "../firebase/firebase"
-import {setDoc,doc} from "firebase/firestore"
+import {setDoc,doc,addDoc,collection} from "firebase/firestore"
 
 
 
@@ -8,10 +8,10 @@ import {setDoc,doc} from "firebase/firestore"
 //chat fecht
 //chat send
  export const createChat=createAsyncThunk("create-chat", async()=>{
-    await setDoc(doc(store,"chatroom","admin1@gamil.com"),{
-        sender:"admin1@gamil.com"
+   const chatRef= await addDoc(collection(store,""))
+      setDoc(doc(chatRef,"chats"))
     })
- })
+ 
 // chat edit
 // chat delete
 
