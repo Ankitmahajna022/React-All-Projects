@@ -10,7 +10,7 @@
   max-width: 500px;
   background: #574cd6;
   color: #fff;
-  padding: 20px;
+  padding: 5px;
   border-right: 2px solid rgba(255, 255, 255, 0.2);
   overflow-y: auto;
   display: flex;
@@ -21,7 +21,7 @@
   flex: 5;
   background: #fff;
   border-radius: 15px 0 0 15px;
-  padding: 20px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
