@@ -2,12 +2,15 @@ import React, { useRef } from 'react'
 import { useDispatch } from "react-redux"
 import { addUser } from "../../../Slices/userSlice"
 import { createChat } from "../../../Slices/chatSlice"
+import { useNavigate } from 'react-router-dom'
+import "./SignUp.css"
 
 function SignUp() {
   const nameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
 
+const navigate=useNavigate()
   const dispatch = useDispatch()
 
   const handlaSignUp = () => {
@@ -17,19 +20,32 @@ function SignUp() {
     const password = passwordRef.current.value
 
     dispatch(addUser({ name, email, password }))
+   navigate("/Home")
 
   }
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <button onClick={() => {
-        dispatch(createChat())
-      }}></button>
-      <input type="name" placeholder='name' ref={nameRef} />
-      <input type="email" placeholder='email' ref={emailRef} />
-      <input type="password" placeholder='password' ref={passwordRef} />
-      <button onClick={handlaSignUp}>Sign Up</button>
+  
+    <div className="signup-container">
+      <div className="signup-box">
+        <h1>Sign Up</h1>
+
+        {/* Small createChat button (optional) */}
+        <button
+          className="small-btn"
+          onClick={() => {
+            dispatch(createChat())
+          }}
+        >
+          Create Chat
+        </button>
+
+        <input type="text" placeholder="Name" ref={nameRef} />
+        <input type="email" placeholder="Email" ref={emailRef} />
+        <input type="password" placeholder="Password" ref={passwordRef} />
+
+        <button onClick={handlaSignUp}>Sign Up</button>
+      </div>
     </div>
   )
 }

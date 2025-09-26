@@ -1,26 +1,35 @@
 .main {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg, #574cd6, #7d6eff);
+  display: flex;
+  height: 100vh;
+  width: 1;
+  background: linear-gradient(135deg, #574cd6, #7d6eff);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Sidebar */
 .user {
-    flex: 4;
-    max-width: 550px;
-    background: #574cd6;
-    color: white;
-    padding: 15px;
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
-    overflow-y: auto;
+  flex: 6;
+  max-width: 500px;
+  background: #574cd6;
+  color: #fff;
+  padding: 20px;
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
+/* Chat area */
 .chatBox {
-    width: 60%;
-    background: #fff;
-    border-radius: 15px 0 0 15px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
+  flex: 5;
+  background: #fff;
+  border-radius: 15px 0 0 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  /* 👇 important fix */
+  height: 100%;    
 }

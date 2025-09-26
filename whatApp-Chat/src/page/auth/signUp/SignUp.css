@@ -1,0 +1,69 @@
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #574cd6, #7d6eff);
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.signup-box {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  text-align: center;
+}
+
+.signup-box h1 {
+  margin-bottom: 25px;
+  color: #574cd6;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* Input fields */
+.signup-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.25s ease;
+}
+
+.signup-box input:focus {
+  border-color: #7d6eff;
+  box-shadow: 0 0 6px rgba(125, 110, 255, 0.4);
+}
+
+/* Buttons */
+.signup-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background: #574cd6;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup-box button:hover {
+  background: #7d6eff;
+}
+
+/* Extra small button (createChat one, if you keep it) */
+.signup-box .small-btn {
+  background: #7d6eff;
+  font-size: 12px;
+  padding: 6px 12px;
+  margin-bottom: 15px;
+}
