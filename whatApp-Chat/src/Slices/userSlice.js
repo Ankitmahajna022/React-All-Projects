@@ -1,7 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { collection, getDocs, addDoc, deleteDoc, doc, } from "firebase/firestore"
+import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, } from "firebase/firestore"
 import { store, auth } from "../firebase/firebase"
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
+import { data } from "react-router-dom"
 
 
 
@@ -10,7 +11,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 const signUpUser = async (email, password) => {
     const userCreate = await createUserWithEmailAndPassword(auth, email, password)
 
-    const user = {
+    const user = { 
         email: userCreate.user.email,
         displayName: userCreate.user.displayName,
         image: userCreate.user.photoURL
@@ -69,7 +70,11 @@ export const addUser = createAsyncThunk("User-add", async ({ email, password, na
 });
 
 //updata user
-const updataUser = createAsyncThunk("updata-user")
+const updataUser = createAsyncThunk("updata-user",async({id,data})=>{
+    updateDoc(doc(store,"users",id),data)
+    
+    return{id,...data}
+})
 
 //delete user
 export const deleteUser = createAsyncThunk("User-delete", async (id) => {
