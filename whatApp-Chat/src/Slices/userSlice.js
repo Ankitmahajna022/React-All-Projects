@@ -54,7 +54,7 @@ export const fetchUser = createAsyncThunk("Usre-fetch", async () => {
 })
 
 // add user
-export const addUser = createAsyncThunk("User-add", async ( {email, password, name} ) => {
+export const addUser = createAsyncThunk("User-add", async ({ email, password, name }) => {
     const user = await signUpUser(email, password);
 
     if (user) {
@@ -69,11 +69,11 @@ export const addUser = createAsyncThunk("User-add", async ( {email, password, na
 });
 
 //updata user
-const updataUser = () => { }
+const updataUser = createAsyncThunk("updata-user")
 
 //delete user
 export const deleteUser = createAsyncThunk("User-delete", async (id) => {
-    deleteDoc(doc(store, "users", id))
+    await deleteDoc(doc(store, "users", id))
     return id;
 })
 
@@ -132,6 +132,21 @@ const userSlice = createSlice({
             .addCase(signInUser.rejected, (state) => {
                 state.isLoading = false;
                 state.error = "User not Find...!"
+            })
+            .addCase(updataUser.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updataUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const { id, ...change } = action.payload;
+                const user = state.users.find(c => c.id === id);
+                if (user) {
+                    Object.assign(user, change);
+                }
+            })
+            .addCase(updataUser.rejected, (state) => {
+                state.error = "User not Updata....!!";
+                state.isLoading = false;
             });
     }
 })
