@@ -50,7 +50,7 @@ const chatSlice = createSlice({
             state.isLoading = false;
             state.chats.push(action.payload);
          })
-         .addCase(createChat.rejected, (state, action) => {
+         .addCase(createChat.rejected, (state) => {
             state.error = "chat is not send..!";
             state.isLoding = false;
          })

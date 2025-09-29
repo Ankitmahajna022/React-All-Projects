@@ -1,42 +1,49 @@
-import React, { useRef } from 'react'
-import { useDispatch } from "react-redux"
-import { addUser } from "../../../Slices/userSlice"
-import { createChat } from "../../../Slices/chatSlice"
-import { useNavigate } from 'react-router-dom'
-import "./SignUp.css"
+import React, { useRef } from 'react';
+import { useDispatch } from "react-redux";
+import { addUser } from "../../../Slices/userSlice";
+import { useNavigate } from 'react-router-dom';
+import "./SignUp.css";
 
 function SignUp() {
-  const nameRef = useRef()
-  const emailRef = useRef()
-  const passwordRef = useRef()
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-const navigate=useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handlaSignUp = () => {
+  const handleSignUp = () => {
+    const name = nameRef.current.value.trim();
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
 
-    const name = nameRef.current.value
-    const email = emailRef.current.value
-    const password = passwordRef.current.value
+    if (!name || !email || !password) {
+      alert("Please fill all fields");
+      return;
+    }
 
     dispatch(addUser({ name, email, password }))
-   navigate("/Home")
-
-  }
+      .unwrap()
+      .then(() => {
+        navigate("/Home");
+        nameRef.current.value = "";
+        emailRef.current.value = "";
+        passwordRef.current.value = "";
+      })
+      .catch(err => alert(err.message));
+  };
 
   return (
-  
     <div className="signup-container">
       <div className="signup-box">
         <h1>Sign Up</h1>
         <input type="text" placeholder="Name" ref={nameRef} />
         <input type="email" placeholder="Email" ref={emailRef} />
         <input type="password" placeholder="Password" ref={passwordRef} />
-
-        <button onClick={handlaSignUp}>Sign Up</button>
+        <button onClick={handleSignUp}>Sign Up</button>
       </div>
     </div>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;

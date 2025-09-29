@@ -5,7 +5,7 @@ import chatReducer from "../Slices/chatSlice";
 
 export const store=configureStore({
     reducer:{
-        usres:userReducer,
+        users:userReducer,
         chats:chatReducer
     }
 })
