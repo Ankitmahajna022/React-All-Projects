@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ListGroup from "react-bootstrap/ListGroup";
-import Badge from "react-bootstrap/Badge";
-import { fetchUser, deleteUser } from "../../Slices/userSlice"; // adjust path
+import { fetchUser } from "../../Slices/userSlice"; // adjust path
+import { setActiveChat } from "../../Slices/chatSlice"; // adjust path
 import "./User.css";
 
 function User() {
@@ -19,19 +19,21 @@ function User() {
 
   return (
     <div>
+      <h2>User List</h2>
       <ListGroup as="ol" numbered>
         {users.map((user) => (
           <ListGroup.Item
             as="li"
             key={user.id}
             className="d-flex justify-content-between align-items-start"
-             onDoubleClick={()=>dispatch(deleteUser(user.id))}
+            style={{ cursor: "pointer" }}
+            onClick={() => dispatch(setActiveChat(user))} // 👈 open chat on click
           >
             <div className="ms-2 me-auto">
-              <h3 className="fw-bold">{user.name}</h3>
-              
+              <h5 className="fw-bold">{user.name}</h5>
+              <small>{user.email}</small>
             </div>
-           </ListGroup.Item>
+          </ListGroup.Item>
         ))}
       </ListGroup>
     </div>

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { store } from "../firebase/firebase"
-import {  doc, addDoc, collection, getDocs, deleteDoc, updateDoc } from "firebase/firestore"
+import { doc, addDoc, collection, getDocs, deleteDoc, updateDoc } from "firebase/firestore"
 
 
 
@@ -40,7 +40,14 @@ const initaliState = {
 const chatSlice = createSlice({
    name: "chats",
    initialState: initaliState,
-   reducers: {},
+   reducers: {
+      setActiveChat: (state, action) => {
+         state.activeChat = action.payload;
+      },
+      closeChat: (state) => {
+         state.activeChat = null;
+      }
+   },
    extraReducers: (builder) => {
       builder.addCase(createChat.pending, (state) => {
          state.isLoding = true;
@@ -62,7 +69,7 @@ const chatSlice = createSlice({
             state.isLoding = false;
          })
          .addCase(chatFecht.rejected, (state) => {
-            state.error = "Cant fetch chats !!";
+            state.error = "Cant fetch chats !!";   
             state.isLoding = false;
          })
          .addCase(deleteChat.pending, (state) => {
@@ -92,3 +99,4 @@ const chatSlice = createSlice({
 })
 
 export default chatSlice.reducer
+export const { setActiveChat, closeChat } = chatSlice.actions;
