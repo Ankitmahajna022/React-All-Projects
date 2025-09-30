@@ -1,0 +1,118 @@
+{
+  "products": [
+    {
+      "id": "2",
+      "title": "Dining Table",
+      "category": "Furniture",
+      "price": 15000
+    },
+    {
+      "id": "4",
+      "title": "Wrist Watch",
+      "category": "Accessories",
+      "price": 7000
+    },
+    {
+      "id": "5",
+      "title": "Smartphone",
+      "category": "Mobiles",
+      "price": 30000
+    },
+    {
+      "id": "6",
+      "title": "Refrigerator",
+      "category": "Home Appliances",
+      "price": 25000
+    },
+    {
+      "id": "7",
+      "title": "Microwave Oven",
+      "category": "Kitchen",
+      "price": 12000
+    },
+    {
+      "id": "8",
+      "title": "Notebook",
+      "category": "Stationery",
+      "price": 200
+    },
+    {
+      "id": "9",
+      "title": "Guitar",
+      "category": "Musical Instruments",
+      "price": 15000
+    },
+    {
+      "id": "10",
+      "title": "Cricket Bat",
+      "category": "Sports",
+      "price": 3500
+    },
+    {
+      "id": "11",
+      "title": "Perfume",
+      "category": "Cosmetics",
+      "price": 1800
+    },
+    {
+      "id": "12",
+      "title": "T-Shirt",
+      "category": "Clothing",
+      "price": 800
+    },
+    {
+      "id": "13",
+      "title": "Sofa",
+      "category": "Living Room",
+      "price": 22000
+    },
+    {
+      "id": "14",
+      "title": "Bed Mattress",
+      "category": "Bedroom",
+      "price": 18000
+    },
+    {
+      "id": "15",
+      "title": "Cycle",
+      "category": "Vehicles",
+      "price": 9000
+    },
+    {
+      "id": "16",
+      "title": "Headphones",
+      "category": "Audio",
+      "price": 2500
+    },
+    {
+      "id": "17",
+      "title": "Handbag",
+      "category": "Fashion",
+      "price": 3000
+    },
+    {
+      "id": "18",
+      "title": "Toy Car",
+      "category": "Kids",
+      "price": 1500
+    },
+    {
+      "id": "19",
+      "title": "Camera",
+      "category": "Photography",
+      "price": 45000
+    },
+    {
+      "id": "20",
+      "title": "Mixer Grinder",
+      "category": "Kitchen Appliances",
+      "price": 5000
+    },
+    {
+      "id": "3351",
+      "title": "Laptop",
+      "category": "Electronics",
+      "price": 50000
+    }
+  ]
+}
