@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeChat } from "../../Slices/chatSlice";
+import { closeChat, createChat, chatFecht } from "../../Slices/chatSlice";
 import "./ChatBox.css";
 
 function ChatBox() {
-  const activeChat = useSelector((state) => state.chats.activeChat); 
   const dispatch = useDispatch();
+  const { activeChat, chats } = useSelector((state) => state.chats);
+  const [message, setMessage] = useState("");
 
-  if (!activeChat) return null; // if no chat is selected, don't render
+  // load chats from firestore whenever chat opens
+  useEffect(() => {
+    if (activeChat) {
+      dispatch(chatFecht());
+    }
+  }, [activeChat, dispatch]);
+
+  if (!activeChat) return null;
+
+  // handle send message
+  const handleSend = () => {
+    if (!message.trim()) return;
+
+    dispatch(
+      createChat({
+        sender: "chats", // firestore collection name
+        chats: {
+          text: message,
+          senderId: "me", // later replace with logged in user id
+          receiverId: activeChat.id,
+          createdAt: new Date().toISOString(),
+        },
+      })
+    );
+
+    setMessage(""); // clear input
+  };
 
   return (
     <div className="chatbox">
@@ -19,14 +46,30 @@ function ChatBox() {
 
       {/* Messages */}
       <div className="chatbox-messages">
-        <p>Hello {activeChat.name} 👋</p>
-        {/* Later you’ll map through messages here */}
+        {chats.length === 0 ? (
+          <p className="no-msg">No messages yet...</p>
+        ) : (
+          chats.map((msg) => (
+            <p
+              key={msg.id}
+              className={msg.senderId === "me" ? "my-message" : "their-message"}
+            >
+              {msg.text}
+            </p>
+          ))
+        )}
       </div>
 
       {/* Input */}
       <div className="chatbox-input">
-        <input type="text" placeholder="Type a message..." />
-        <button>Send</button>
+        <input
+          type="text"
+          placeholder="Type a message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+        />
+        <button onClick={handleSend}>Send</button>
       </div>
     </div>
   );
