@@ -18,6 +18,4 @@ A real-time chat application built with **React**. This app allows users to comm
 - **Backend (Optional):** Firebase / Node.js + Express + Socket.io
 - **Database (Optional):** Firebase Firestore / MongoDB
 
-## Installation 🚀
-1. **Clone the repository**
-```bash
+
