@@ -16,7 +16,6 @@ A real-time chat application built with **React**. This app allows users to comm
 ## Tech Stack 🛠️
 - **Frontend:** React, Redux (or Context API)
 - **Styling:** CSS / Tailwind / Material-UI
-- **Backend (Optional):** Firebase / Node.js + Express + Socket.io
-- **Database (Optional):** Firebase Firestore / MongoDB
+- **Database (Optional):** Firebase Firestore 
 
 
