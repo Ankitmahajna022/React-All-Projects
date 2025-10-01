@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signInUser } from "../../../Slices/userSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./SignIn.css";
@@ -11,6 +11,8 @@ function SignIn() {
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
+  const { currentUser, loading, error } = useSelector((state) => state.users);
+
   const handleSignIn = () => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
@@ -21,7 +23,7 @@ function SignIn() {
         navigate("/Home");
       })
       .catch((err) => {
-        alert("Login failed: " + err.message);
+        alert("Login failed: " + err);
       });
   };
 
@@ -31,8 +33,18 @@ function SignIn() {
         <h1>Sign In</h1>
         <input type="text" placeholder="Email" ref={emailRef} />
         <input type="password" placeholder="Password" ref={passwordRef} />
-        <button onClick={handleSignIn}>Submit</button>
+        <button onClick={handleSignIn} disabled={loading}>
+          {loading ? "Loading..." : "Submit"}
+        </button>
         <NavLink to="/SignUp">Sign Up</NavLink>
+
+        {currentUser && (
+          <p className="user-info">
+            Logged in as: <b>{currentUser.email}</b>
+          </p>
+        )}
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   );

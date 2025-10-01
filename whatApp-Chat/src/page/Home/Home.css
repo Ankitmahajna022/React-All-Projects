@@ -1,29 +1,38 @@
 .main {
   display: flex;
-  height: 100vh;
-  width: 1;
-  background: linear-gradient(135deg, #574cd6, #7d6eff);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  height: 85vh; 
+  gap: 16px;
+  padding: 10px;
+  background: #f5f6ff;
 }
+
 .user {
-  flex: 6;
-  max-width: 500px;
-  background: #574cd6;
-  color: #fff;
-  padding: 5px;
-  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  flex: 1; 
+  background: #7d6eff;
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
+
 .chatBox {
-  flex: 5;
-  background: #fff;
-  border-radius: 15px 0 0 15px;
-  padding: 5px;
+  flex: 2; 
+  background: #574cd6;
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  height: 100%;    
+  overflow-y: hidden;
+}
+
+.user::-webkit-scrollbar,
+.chatBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.user::-webkit-scrollbar-thumb,
+.chatBox::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }

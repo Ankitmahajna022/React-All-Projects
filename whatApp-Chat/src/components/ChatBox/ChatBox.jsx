@@ -1,75 +1,108 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeChat, createChat, chatFecht } from "../../Slices/chatSlice";
+import { createChat, chatFecht, deleteChat, editChat } from "../../Slices/chatSlice";
 import "./ChatBox.css";
 
 function ChatBox() {
   const dispatch = useDispatch();
   const { activeChat, chats } = useSelector((state) => state.chats);
+  const { currentUser } = useSelector((state) => state.users);
   const [message, setMessage] = useState("");
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState("");
+  const messagesEndRef = useRef(null);
 
-  // load chats from firestore whenever chat opens
   useEffect(() => {
-    if (activeChat) {
-      dispatch(chatFecht());
+    if (activeChat && currentUser) {
+      dispatch(chatFecht(activeChat.id));
     }
-  }, [activeChat, dispatch]);
+  }, [activeChat, currentUser, dispatch]);
 
-  if (!activeChat) return null;
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chats]);
 
-  // handle send message
-  const handleSend = () => {
-    if (!message.trim()) return;
+  const sendMessage = () => {
+    if (!message.trim() || !currentUser) return;
 
     dispatch(
       createChat({
-        sender: "chats", // firestore collection name
-        chats: {
-          text: message,
-          senderId: "me", // later replace with logged in user id
-          receiverId: activeChat.id,
-          createdAt: new Date().toISOString(),
-        },
+        chatId: activeChat.id,
+        message: { senderId: currentUser.email, text: message },
       })
-    );
-
-    setMessage(""); // clear input
+    ).then(() => setMessage(""));
   };
 
+  const updateMessage = (id) => {
+    if (!editText.trim()) return;
+    dispatch(
+      editChat({ chatId: activeChat.id, id, data: { text: editText } })
+    );
+    setEditId(null);
+    setEditText("");
+  };
+
+  const removeMessage = (id) => {
+    dispatch(deleteChat({ chatId: activeChat.id, id }));
+  };
+
+  if (!activeChat) return <div>Select a user to chat</div>;
+
   return (
-    <div className="chatbox">
-      {/* Header */}
-      <div className="chatbox-header">
-        <h3>Chat with {activeChat.name}</h3>
-        <button onClick={() => dispatch(closeChat())}>×</button>
+    <div className="chat-box">
+      <div className="chat-header">
+        <h3>{activeChat.name}</h3>
       </div>
 
-      {/* Messages */}
-      <div className="chatbox-messages">
-        {chats.length === 0 ? (
-          <p className="no-msg">No messages yet...</p>
-        ) : (
-          chats.map((msg) => (
-            <p
-              key={msg.id}
-              className={msg.senderId === "me" ? "my-message" : "their-message"}
+      <div className="chat-messages">
+        {chats.map((c) => {
+          const isCurrentUser = c.senderId === currentUser.email;
+          const isEditing = editId === c.id;
+
+          return (
+            <div
+              key={c.id}
+              className={`msg-box ${isCurrentUser ? "right" : "left"}`}
+              onClick={() => removeMessage(c.id)} //
+              onDoubleClick={(e) => {
+                e.stopPropagation();
+                if (isCurrentUser) {
+                  setEditId(c.id);
+                  setEditText(c.text);
+                }
+              }}
             >
-              {msg.text}
-            </p>
-          ))
-        )}
+              {isEditing ? (
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  onBlur={() => updateMessage(c.id)}
+                  onKeyDown={(e) => e.key === "Enter" && updateMessage(c.id)}
+                  autoFocus
+                />
+              ) : (
+                <span>{c.text}</span>
+              )}
+            </div>
+          );
+        })}
+        <div ref={messagesEndRef} />
       </div>
 
-      {/* Input */}
-      <div className="chatbox-input">
+      <div className="input-box">
         <input
           type="text"
           placeholder="Type a message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSend()}
+          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
-        <button onClick={handleSend}>Send</button>
+        <button onClick={sendMessage} disabled={!message.trim()}>
+          Send
+        </button>
       </div>
     </div>
   );

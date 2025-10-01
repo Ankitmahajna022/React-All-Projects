@@ -25,7 +25,7 @@ function SignUp() {
     dispatch(addUser({ name, email, password }))
       .unwrap()
       .then(() => {
-        navigate("/Home");
+        navigate("/SignIn");
         nameRef.current.value = "";
         emailRef.current.value = "";
         passwordRef.current.value = "";

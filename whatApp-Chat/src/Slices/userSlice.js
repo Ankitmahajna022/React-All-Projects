@@ -11,7 +11,7 @@ import { data } from "react-router-dom"
 const signUpUser = async (email, password) => {
     const userCreate = await createUserWithEmailAndPassword(auth, email, password)
 
-    const user = { 
+    const user = {
         email: userCreate.user.email,
         displayName: userCreate.user.displayName,
         image: userCreate.user.photoURL
@@ -20,18 +20,21 @@ const signUpUser = async (email, password) => {
 }
 
 //signInUser
-export const signInUser = createAsyncThunk("signInUser", async ({ email, password }) => {
-
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-
-    const user = {
-        email: userCredential.user.email,
-        displayName: userCredential.user.displayName,
-        image: userCredential.user.photoURL,
+export const signInUser = createAsyncThunk(
+    "user/signInUser",
+    async ({ email, password }, { rejectWithValue }) => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            return {
+                uid: userCredential.user.uid,
+                email: userCredential.user.email,
+            };
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
     }
+);
 
-    return user;
-})
 
 const initialState = {
     currentUser: {},
@@ -70,10 +73,10 @@ export const addUser = createAsyncThunk("User-add", async ({ email, password, na
 });
 
 //updata user
-const updataUser = createAsyncThunk("updata-user",async({id,data})=>{
-    updateDoc(doc(store,"users",id),data)
-    
-    return{id,...data}
+const updataUser = createAsyncThunk("updata-user", async ({ id, data }) => {
+    updateDoc(doc(store, "users", id), data)
+
+    return { id, ...data }
 })
 
 //delete user
@@ -86,7 +89,11 @@ export const deleteUser = createAsyncThunk("User-delete", async (id) => {
 const userSlice = createSlice({
     name: "users",
     initialState,
-    reducers: {},
+    reducers: {
+        logoutUser: (state) => {
+            state.currentUser = null;
+        },
+    },
     extraReducers: (buildr) => {
         buildr.addCase(fetchUser.pending, (state) => {
             state.isLoading = true;
@@ -128,11 +135,8 @@ const userSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(signInUser.fulfilled, (state, action) => {
-                const user = action.payload;
-                state.currentUser = state.users.find(
-                    (value) => value.email == user.email
-                );
-                state.isLoading = false;
+                state.isLoading= false;
+                state.currentUser = action.payload;
             })
             .addCase(signInUser.rejected, (state) => {
                 state.isLoading = false;
