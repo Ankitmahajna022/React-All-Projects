@@ -10,12 +10,11 @@ A real-time chat application built with **React**. This app allows users to comm
 - Easy to extend with Firebase or other backend services
 
 ## Screenshots 🖼️
-*(Add screenshots of your app here)*
+<img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/b82dd049-7eb4-498b-8b66-626067bcb1bc" />
+##video
+https://drive.google.com/file/d/19qHU7Le0w_5HJRH2me6gFSSxEt6-pOQf/view?usp=sharing
 
 ## Tech Stack 🛠️
 - **Frontend:** React, Redux (or Context API)
 - **Styling:** CSS / Tailwind / Material-UI
-- **Backend (Optional):** Firebase / Node.js + Express + Socket.io
-- **Database (Optional):** Firebase Firestore / MongoDB
-
-
+- **Database (Optional):** Firebase Firestore 
