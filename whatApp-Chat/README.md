@@ -12,7 +12,7 @@ A real-time chat application built with **React**. This app allows users to comm
 ## Screenshots 🖼️
 <img width="1919" height="910" alt="image" src="https://github.com/user-attachments/assets/b82dd049-7eb4-498b-8b66-626067bcb1bc" />
 ##video
-https://drive.google.com/file/d/19qHU7Le0w_5HJRH2me6gFSSxEt6-pOQf/view?usp=sharing
+https://drive.google.com/file/d/1r7FGXiQyBl50XKM2JkY65qdF3zrN7qHu/view?usp=sharing
 
 ## Tech Stack 🛠️
 - **Frontend:** React, Redux (or Context API)
