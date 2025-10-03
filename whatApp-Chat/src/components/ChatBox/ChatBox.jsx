@@ -65,8 +65,8 @@ function ChatBox() {
             <div
               key={c.id}
               className={`msg-box ${isCurrentUser ? "right" : "left"}`}
-              onClick={() => removeMessage(c.id)} //
-              onDoubleClick={(e) => {
+              onDoubleClick={() => removeMessage(c.id)} //
+              onClick={(e) => {
                 e.stopPropagation();
                 if (isCurrentUser) {
                   setEditId(c.id);
@@ -97,7 +97,7 @@ function ChatBox() {
           type="text"
           placeholder="Type a message..."
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessage(e.target.value)|| setEditText(c.text)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <button onClick={sendMessage} disabled={!message.trim()}>
