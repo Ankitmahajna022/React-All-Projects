@@ -8,6 +8,8 @@ function EditStudent() {
   const student = useSelector((state) =>
     state.students.find((s) => s.id === parseInt(id))
   );
+
+  
   const [name, setName] = useState(student.name);
   const [email, setEmail] = useState(student.email);
   const dispatch = useDispatch();
