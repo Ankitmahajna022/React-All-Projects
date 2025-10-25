@@ -19,6 +19,7 @@ This project demonstrates how to manage **students, courses, and teachers** with
   - Navigation between pages (Dashboard, Students, Courses, Teachers).
 - 🎨 **Basic UI**
   - Responsive and simple design.
+    
 
 ---
 
